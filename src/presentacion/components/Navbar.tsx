@@ -32,17 +32,10 @@ export const Navbar = ({ activeTab, onTabChange, client, isClientView }: NavbarP
         <div className="max-w-[1440px] mx-auto px-6 lg:px-10 py-4 flex justify-between items-center">
           {/* Logo */}
           <div className="flex items-center gap-3">
-            <div className="w-10 h-10 bg-surface-900 dark:bg-white rounded-xl flex items-center justify-center text-white dark:text-surface-900 font-extrabold text-xl shadow-lg transform -rotate-3 italic">
-              B
-            </div>
-            <div>
-              <h1 className="font-extrabold text-xl leading-none tracking-tighter text-surface-900 dark:text-white">
-                BOX<span className="text-brand-600 dark:text-brand-400">STUDIO</span>
-              </h1>
-              <p className="text-[9px] font-extrabold text-surface-400 dark:text-surface-500 uppercase tracking-[0.2em]">
-                Client Portal • v2.0
-              </p>
-            </div>
+            <img src="/logo-web-white.png" alt="Box Studio" className="h-16 w-auto dark:invert-0 invert" />
+            <span className="hidden sm:inline-block px-2 py-0.5 rounded bg-surface-100 dark:bg-surface-800 text-[9px] font-extrabold text-surface-500 dark:text-surface-400 uppercase tracking-widest border border-surface-200 dark:border-surface-700 mt-1">
+              Client Portal
+            </span>
           </div>
 
           {/* Desktop Nav */}

@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { Lock, Mail, ArrowRight, Eye, EyeOff } from 'lucide-react';
+import { WebGLCube } from '../components/WebGLCube';
 
 interface LoginViewProps {
   onLogin: (email: string, password: string) => Promise<void>;
@@ -19,63 +20,62 @@ export const LoginView = ({ onLogin }: LoginViewProps) => {
 
   return (
     <div className="min-h-screen flex bg-surface-50 dark:bg-surface-950">
-      {/* Left Panel — Branding */}
+      {/* Left Panel — Glass Cube Hero */}
       <div className="hidden lg:flex lg:w-1/2 relative overflow-hidden">
-        <div className="absolute inset-0 bg-gradient-to-br from-surface-900 via-surface-800 to-surface-900" />
+        {/* Stitch background: deep burgundy gradient */}
+        <div className="absolute inset-0" style={{ background: 'linear-gradient(135deg, #200e11 0%, #1a090c 40%, #291619 100%)' }} />
         
-        {/* Decorative elements */}
-        <div className="absolute top-20 left-20 w-64 h-64 rounded-full bg-brand-600/10 blur-3xl animate-float" />
-        <div className="absolute bottom-20 right-20 w-80 h-80 rounded-full bg-brand-500/5 blur-3xl animate-float" style={{ animationDelay: '3s' }} />
-        <div className="absolute top-1/3 right-1/4 w-40 h-40 rounded-full bg-emerald-500/5 blur-2xl animate-float" style={{ animationDelay: '1.5s' }} />
+        {/* Magenta ambient glow orbs */}
+        <div className="absolute top-16 left-16 w-72 h-72 rounded-full blur-[100px] animate-float" style={{ background: 'rgba(254, 0, 101, 0.08)' }} />
+        <div className="absolute bottom-16 right-16 w-96 h-96 rounded-full blur-[120px] animate-float" style={{ background: 'rgba(255, 78, 122, 0.05)', animationDelay: '3s' }} />
         
-        {/* Grid pattern */}
-        <div className="absolute inset-0 opacity-[0.03]" 
+        {/* Subtle grid pattern */}
+        <div className="absolute inset-0 opacity-[0.02]" 
           style={{ 
-            backgroundImage: 'linear-gradient(rgba(255,255,255,.1) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,.1) 1px, transparent 1px)',
-            backgroundSize: '60px 60px' 
+            backgroundImage: 'linear-gradient(rgba(255,178,189,.15) 1px, transparent 1px), linear-gradient(90deg, rgba(255,178,189,.15) 1px, transparent 1px)',
+            backgroundSize: '80px 80px' 
           }} 
         />
 
         <div className="relative z-10 flex flex-col justify-between p-16 w-full">
-          <div className="flex items-center gap-3">
-            <div className="w-12 h-12 bg-white rounded-xl flex items-center justify-center text-surface-900 font-extrabold text-2xl shadow-2xl transform -rotate-3 italic">
-              B
-            </div>
-            <div>
-              <h1 className="font-extrabold text-2xl text-white leading-none tracking-tighter">
-                BOX<span className="text-brand-400">STUDIO</span>
-              </h1>
-              <p className="text-[9px] font-extrabold text-surface-500 uppercase tracking-[0.2em]">
-                Client Portal
-              </p>
+          {/* Logo top */}
+          <div className="flex items-center gap-3 relative z-20">
+            <img src="/logo-web-white.png" alt="Box Studio" className="h-32 w-auto brightness-0 invert opacity-90" />
+          </div>
+
+          {/* WebGL Cube — Center Hero */}
+          <div className="flex-1 flex items-center justify-center -mt-8 relative z-10">
+            <div className="w-full h-full max-h-[600px] max-w-[600px] relative">
+              <WebGLCube />
             </div>
           </div>
 
-          <div className="max-w-md">
-            <h2 className="text-5xl font-extrabold text-white tracking-tighter leading-[1.1] mb-6">
+          {/* Bottom content */}
+          <div>
+            <h2 className="text-4xl font-extrabold tracking-tighter leading-[1.1] mb-4" style={{ color: '#fddadd' }}>
               Tu agencia,
               <br />
-              <span className="text-transparent bg-clip-text bg-gradient-to-r from-brand-400 to-brand-600">
+              <span className="text-transparent bg-clip-text" style={{ backgroundImage: 'linear-gradient(135deg, #ffb2bd, #fe0065)' }}>
                 transparente.
               </span>
             </h2>
-            <p className="text-lg text-surface-400 leading-relaxed font-medium">
+            <p className="text-base leading-relaxed font-medium mb-8" style={{ color: '#ad878c' }}>
               Visualiza el rendimiento de tus campañas en tiempo real, consulta con tu IA 24/7, 
               y nunca más esperes por un reporte manual.
             </p>
-          </div>
 
-          <div className="flex items-center gap-6">
-            {[
-              { value: '5.2x', label: 'ROAS Promedio' },
-              { value: '-17%', label: 'Reducción CPA' },
-              { value: '24/7', label: 'Consultor IA' },
-            ].map((stat) => (
-              <div key={stat.label} className="text-center">
-                <p className="text-2xl font-extrabold text-white tracking-tight">{stat.value}</p>
-                <p className="text-[9px] font-extrabold text-surface-500 uppercase tracking-widest mt-1">{stat.label}</p>
-              </div>
-            ))}
+            <div className="flex items-center gap-8">
+              {[
+                { value: '5.2x', label: 'ROAS Promedio' },
+                { value: '-17%', label: 'Reducción CPA' },
+                { value: '24/7', label: 'Consultor IA' },
+              ].map((stat) => (
+                <div key={stat.label} className="text-center">
+                  <p className="text-2xl font-extrabold tracking-tight" style={{ color: '#fddadd' }}>{stat.value}</p>
+                  <p className="text-[9px] font-extrabold uppercase tracking-widest mt-1" style={{ color: '#5d3f43' }}>{stat.label}</p>
+                </div>
+              ))}
+            </div>
           </div>
         </div>
       </div>

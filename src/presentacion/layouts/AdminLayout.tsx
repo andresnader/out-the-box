@@ -35,19 +35,11 @@ export const AdminLayout = ({ activeSection, onSectionChange, children }: AdminL
   const SidebarContent = () => (
     <>
       {/* Logo */}
-      <div className="p-6 flex items-center gap-3">
-        <div className="w-10 h-10 bg-white rounded-xl flex items-center justify-center text-surface-900 font-extrabold text-lg shadow-lg transform -rotate-3 italic shrink-0">
-          B
-        </div>
-        {!collapsed && (
-          <div className="min-w-0">
-            <h1 className="font-extrabold text-lg text-white leading-none tracking-tighter">
-              BOX<span className="text-brand-400">STUDIO</span>
-            </h1>
-            <p className="text-[8px] font-extrabold text-surface-500 uppercase tracking-[0.2em]">
-              Agency Panel
-            </p>
-          </div>
+      <div className="p-6 flex items-center gap-3 h-[88px]">
+        {collapsed ? (
+          <img src="/box-imagotipo.jpeg" alt="B" className="w-16 h-16 rounded-lg object-cover" />
+        ) : (
+          <img src="/logo-web-white.png" alt="Box Studio" className="h-16 w-auto" />
         )}
       </div>
 
