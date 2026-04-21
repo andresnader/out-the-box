@@ -1,31 +1,50 @@
-import React from 'react';
-import { ArrowUpRight, ArrowDownRight } from 'lucide-react';
+import { ArrowUpRight, ArrowDownRight, type LucideIcon } from 'lucide-react';
 
-export const StatCard = ({ title, value, change, icon: Icon, color = "rose" }: any) => {
-    const colorClasses: any = {
-        rose: "bg-rose-50 text-rose-600",
-        emerald: "bg-emerald-50 text-emerald-600",
-        blue: "bg-blue-50 text-blue-600",
-        amber: "bg-amber-50 text-amber-600"
-    };
+interface StatCardProps {
+  title: string;
+  value: string;
+  change: string;
+  icon: LucideIcon;
+  color?: 'rose' | 'emerald' | 'blue' | 'amber' | 'purple';
+  delay?: number;
+}
 
-    return (
-        <div className="bg-white p-6 rounded-2xl shadow-sm border border-gray-100 hover:shadow-md transition-all duration-300">
-            <div className="flex justify-between items-start">
-                <div>
-                    <p className="text-xs font-bold text-gray-400 uppercase tracking-wider mb-1">{title}</p>
-                    <h3 className="text-2xl font-black text-gray-900">{value}</h3>
-                    {change && (
-                        <div className={`flex items-center mt-2 text-xs font-bold ${change.startsWith('+') ? 'text-emerald-500' : 'text-rose-500'}`}>
-                            {change.startsWith('+') ? <ArrowUpRight size={14} /> : <ArrowDownRight size={14} />}
-                            <span className="ml-1">{change} vs mes anterior</span>
-                        </div>
-                    )}
-                </div>
-                <div className={`p-3 rounded-xl ${colorClasses[color] || colorClasses.rose}`}>
-                    <Icon size={20} />
-                </div>
+const colorMap = {
+  rose:    { bg: 'bg-brand-50 dark:bg-brand-900/20',  text: 'text-brand-600 dark:text-brand-400' },
+  emerald: { bg: 'bg-emerald-50 dark:bg-emerald-900/20', text: 'text-emerald-600 dark:text-emerald-400' },
+  blue:    { bg: 'bg-blue-50 dark:bg-blue-900/20',    text: 'text-blue-600 dark:text-blue-400' },
+  amber:   { bg: 'bg-amber-50 dark:bg-amber-900/20',  text: 'text-amber-600 dark:text-amber-400' },
+  purple:  { bg: 'bg-purple-50 dark:bg-purple-900/20', text: 'text-purple-600 dark:text-purple-400' },
+};
+
+export const StatCard = ({ title, value, change, icon: Icon, color = 'rose', delay = 0 }: StatCardProps) => {
+  const c = colorMap[color];
+  const isPositive = change.startsWith('+');
+
+  return (
+    <div
+      className="card card-hover p-6 group animate-slide-up"
+      style={{ animationDelay: `${delay}ms`, animationFillMode: 'backwards' }}
+    >
+      <div className="flex justify-between items-start">
+        <div className="space-y-1">
+          <p className="text-[11px] font-extrabold text-surface-400 dark:text-surface-500 uppercase tracking-widest">
+            {title}
+          </p>
+          <h3 className="text-2xl font-extrabold text-surface-900 dark:text-white tracking-tight">
+            {value}
+          </h3>
+          {change && (
+            <div className={`flex items-center gap-1 text-xs font-bold ${isPositive ? 'text-emerald-500' : 'text-brand-500'}`}>
+              {isPositive ? <ArrowUpRight size={14} /> : <ArrowDownRight size={14} />}
+              <span>{change} vs mes anterior</span>
             </div>
+          )}
         </div>
-    );
+        <div className={`p-3 rounded-2xl ${c.bg} ${c.text} group-hover:scale-110 transition-transform duration-300`}>
+          <Icon size={22} strokeWidth={2} />
+        </div>
+      </div>
+    </div>
+  );
 };
