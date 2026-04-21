@@ -7,17 +7,24 @@ interface NavbarProps {
   activeTab: string;
   onTabChange: (tab: string) => void;
   client: ClientConfig;
+  isClientView?: boolean;
 }
 
-const TABS = [
+const ALL_TABS = [
   { key: 'dashboard', label: 'Resultados' },
   { key: 'activities', label: 'Bitácora' },
   { key: 'admin', label: 'Configuración' },
 ];
 
-export const Navbar = ({ activeTab, onTabChange, client }: NavbarProps) => {
+const CLIENT_TABS = [
+  { key: 'dashboard', label: 'Resultados' },
+  { key: 'activities', label: 'Bitácora' },
+];
+
+export const Navbar = ({ activeTab, onTabChange, client, isClientView }: NavbarProps) => {
   const { theme, toggleTheme } = useTheme();
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const TABS = isClientView ? CLIENT_TABS : ALL_TABS;
 
   return (
     <>

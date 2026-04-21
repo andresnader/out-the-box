@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { Lock, Mail, ArrowRight, Eye, EyeOff } from 'lucide-react';
 
 interface LoginViewProps {
-  onLogin: () => void;
+  onLogin: (email: string, password: string) => Promise<void>;
 }
 
 export const LoginView = ({ onLogin }: LoginViewProps) => {
@@ -11,12 +11,10 @@ export const LoginView = ({ onLogin }: LoginViewProps) => {
   const [showPassword, setShowPassword] = useState(false);
   const [loading, setLoading] = useState(false);
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setLoading(true);
-    setTimeout(() => {
-      onLogin();
-    }, 1200);
+    await onLogin(email, password);
   };
 
   return (
